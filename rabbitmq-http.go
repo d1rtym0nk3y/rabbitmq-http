@@ -349,12 +349,18 @@ func ExchangeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func HealthHandler(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("OK"))
+}
+
+
 func main() {
 	// Register HTTP Handlers
 	http.HandleFunc("/exchange", ExchangeHandler)
 	http.HandleFunc("/queue/bind", QueueBindHandler)
 	http.HandleFunc("/queue", QueueHandler)
 	http.HandleFunc("/publish", PublishHandler)
+	http.HandleFunc("/health", HealthHandler)
 
 	// Start HTTP Server
 	log.Printf("server run %s (listen %s)\n", *address, *amqpUri)
